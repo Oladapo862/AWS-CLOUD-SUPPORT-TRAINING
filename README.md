@@ -1,310 +1,425 @@
-# 🚀 AWS Cloud Engineer Learning Journey
+# AWS Production Cloud Support Engineer Training
 
-## Overview
-
-Welcome to the **AWS Cloud Engineer Learning Journey**.
-
-This repository is designed to help you learn AWS and Cloud Engineering by building a **single production-ready application** from scratch instead of learning AWS services in isolation.
-
-Throughout this journey, every technology you learn is immediately applied to the same project:
-
-> **Employee Management System**
-
-By the end of the roadmap, you will have built, deployed, monitored, secured, automated, and continuously delivered a production-grade application using modern AWS services and DevOps practices.
+> A hands-on, production-focused AWS Cloud Support Engineer training repository built around real-world operations, troubleshooting, incident response, reliability engineering, and production support.
 
 ---
 
-# Learning Philosophy
+# Overview
 
-This roadmap follows one simple principle:
+This repository documents my end-to-end journey toward becoming a **Production Cloud Support Engineer**.
 
-> **Learn → Practice → Build → Troubleshoot**
+Unlike traditional AWS courses that focus on creating resources, this training focuses on **operating, monitoring, troubleshooting, recovering, and improving production systems** using real-world scenarios.
 
-Every phase introduces a new technology.
+Throughout this training, I worked with three applications:
 
-For each technology, you will:
+* **Flask Application** – Traditional web application running on AWS infrastructure
+* **Google Online Boutique** – Kubernetes-based microservices application
+* **Astronomy Shop** – Cloud-native application used for observability and distributed tracing
 
-1. Learn the concepts.
-2. Perform hands-on exercises.
-3. Integrate that technology into the Employee Management System.
-4. Practice real production troubleshooting scenarios.
-
-Rather than creating many unrelated mini-projects, you continuously improve **one application** until it becomes production ready.
+The emphasis has been on thinking and operating like a **Cloud Support Engineer**, **Cloud Operations Engineer**, or **Site Reliability Engineer (SRE)** rather than an application developer.
 
 ---
 
-# The Project
+# Training Philosophy
 
-Throughout this roadmap, you will build a complete **Employee Management System**.
+The objective of this repository is to answer questions such as:
 
-As the project grows, new AWS services and DevOps tools will be integrated into it.
+* What happens when production breaks?
+* How do you investigate incidents?
+* How do you restore services safely?
+* How do you determine the root cause?
+* How do you prevent incidents from happening again?
 
-The application will eventually include:
+Every module follows a production support mindset.
 
-* Employee registration
-* Employee listing
-* Employee profile images
-* MySQL database
-* Secure file uploads
-* HTTPS
-* High availability
-* Auto Scaling
-* Monitoring
-* Logging
-* Notifications
-* Infrastructure as Code
-* Automated deployments
+Each module includes:
 
-By the final phase, the application will be running in a production-style AWS environment.
+* Real Production Introduction
+* Module Goal
+* What It Is
+* Why Companies Use It
+* Where It Fits in Production Architecture
+* Internal Working
+* Production Workflow
+* Commands Used by Cloud Support Engineers
+* Common Production Failures
+* Incident Tickets
+* Troubleshooting Methodology
 
----
-
-# Learning Order
-
-The roadmap follows the same order a real production environment is built.
-
-1. Linux Fundamentals
-2. Git & GitHub (used throughout the journey)
-3. Amazon EC2
-4. Amazon EBS
-5. Nginx
-6. Python & Virtual Environment
-7. Flask
-8. Running Flask
-9. Gunicorn
-10. Reverse Proxy with Nginx
-11. Amazon RDS
-12. Amazon S3
-13. IAM Roles
-14. CloudWatch
-15. AWS Systems Manager (SSM)
-16. CloudWatch Alarms
-17. Amazon SNS
-18. CloudTrail
-19. VPC, Networking & Security
-20. Application Load Balancer
-21. Target Group
-22. Amazon Route 53
-23. AWS Certificate Manager (ACM)
-24. Auto Scaling Group
-25. Docker
-26. Amazon ECS
-27. AWS Lambda
-28. Terraform
-29. CI/CD with GitHub Actions
-
-Each phase builds on everything completed before it.
-
-Nothing is learned without being applied to the project.
+  * Symptoms
+  * Evidence
+  * Investigation
+  * Root Cause
+  * Recovery
+  * Verification
+  * RCA
+* Hands-on Labs
+* Production Exercises
+* Interview Questions
 
 ---
 
-# Repository Structure
+# Technologies Covered
 
-The repository is organized into learning phases.
+## Linux
 
-Each phase represents one technology.
-
-Example:
-
-```text
-01-linux-fundamentals/
-
-02-ec2/
-
-03-ebs/
-
-04-nginx/
-
-05-python/
-
-...
-
-29-ci-cd/
-```
-
-Every phase contains two main folders.
-
-```text
-01-linux-fundamentals/
-
-├── hands-on/
-
-└── troubleshooting/
-```
+* Linux administration
+* Users and permissions
+* Services
+* SSH
+* Networking
+* Log analysis
+* Process management
+* Disk management
+* Performance troubleshooting
 
 ---
 
-# Hands-on Folder
+## Python & Web Application Operations
 
-The **hands-on** folder contains everything required to learn and practice the technology.
+* Python virtual environments
+* Flask production deployment
+* Gunicorn
+* Nginx
+* systemd
+
+---
+
+## AWS Infrastructure
+
+* AWS CLI
+* IAM
+* EC2
+* EBS
+* VPC
+* Security Groups
+* Network ACLs
+* Route Tables
+* Internet Gateway
+* NAT Gateway
+* Route 53
+* AWS Certificate Manager (ACM)
+* AWS Systems Manager (SSM)
+
+---
+
+## Data Services
+
+* Amazon RDS
+* Redis
+* Amazon S3
+
+---
+
+## Containers & Orchestration
+
+* Docker
+* Amazon ECR
+* Amazon ECS
+* Amazon EKS
+
+---
+
+## Infrastructure as Code & Deployment
+
+* Git
+* CI/CD
+* Terraform
+
+---
+
+## Monitoring & Observability
+
+* Amazon CloudWatch
+* CloudWatch Agent
+* CloudWatch Alarms
+* SNS
+* AWS X-Ray
+* OpenTelemetry
+
+---
+
+## Serverless
+
+* AWS Lambda
+
+---
+
+## Production Operations
+
+* Incident Response
+* Troubleshooting
+* Root Cause Analysis (RCA)
+* Post-Incident Review
+* Reliability Engineering
+
+---
+
+# Applications Used
+
+## Flask Application
+
+Used to practice:
+
+* Linux administration
+* EC2 operations
+* Nginx
+* Gunicorn
+* systemd
+* RDS
+* Redis
+* S3
+* Docker
+* ECS
+* CloudWatch
+* IAM
+* Networking
+* Incident response
+* Root Cause Analysis
+
+Typical production scenarios:
+
+* HTTP 500 errors
+* 502 Bad Gateway
+* 504 Gateway Timeout
+* Database connectivity failures
+* Disk full
+* High CPU
+* Memory exhaustion
+* Deployment failures
+* SSL certificate issues
+* Application recovery
+
+---
+
+## Google Online Boutique
+
+Used to practice Kubernetes and microservices operations.
+
+Topics covered:
+
+* Amazon EKS
+* Pod lifecycle
+* CrashLoopBackOff
+* ImagePullBackOff
+* Kubernetes networking
+* Service-to-service communication
+* Redis failures
+* Rolling deployments
+* Kubernetes troubleshooting
+* Production incidents
+* Distributed application failures
+
+---
+
+## Astronomy Shop
+
+Used to practice cloud-native observability.
+
+Topics covered:
+
+* OpenTelemetry
+* AWS X-Ray
+* Distributed tracing
+* Dependency analysis
+* Performance bottlenecks
+* Latency investigation
+* Root Cause Analysis
+* Post-Incident Reviews
+* Reliability improvements
+
+---
+
+# Production Skills Developed
+
+This repository focuses on the day-to-day responsibilities of a Cloud Support Engineer.
 
 Examples include:
 
-* Step-by-step labs
-* Commands
-* Configuration files
-* Practice exercises
-* Sample code
-* Deployment instructions
-* Mini challenges
-
-The goal of the hands-on folder is to master the technology before integrating it into the project.
-
----
-
-# Troubleshooting Folder
-
-The **troubleshooting** folder contains real production incident scenarios.
-
-Each technology includes multiple production-style troubleshooting exercises using a structured incident playbook.
-
-Example format:
-
-| Production Layer | Customer Complaint | Information to Gather | Check First | Check Next | Deep Investigation | Possible Root Causes | Resolution | Validate | Escalate If |
-| ---------------- | ------------------ | --------------------- | ----------- | ---------- | ------------------ | -------------------- | ---------- | -------- | ----------- |
-
-These scenarios simulate the types of incidents handled by Cloud Support Engineers, Site Reliability Engineers (SREs), and DevOps Engineers in production environments.
+* Production monitoring
+* Incident response
+* Infrastructure troubleshooting
+* Application troubleshooting
+* Database troubleshooting
+* Network troubleshooting
+* Container troubleshooting
+* Kubernetes troubleshooting
+* Performance analysis
+* Root Cause Analysis
+* Reliability improvement
+* Documentation
+* Production communication
 
 ---
 
-# Learning Format
+# Troubleshooting Workflow
 
-Every phase follows the exact same structure.
+Every production issue is approached using the same structured methodology.
 
-## Goal
+Symptoms
 
-Understand what the technology is used for.
+↓
+
+Customer Impact
+
+↓
+
+Evidence Collection
+
+↓
+
+Metrics
+
+↓
+
+Logs
+
+↓
+
+Distributed Traces
+
+↓
+
+Investigation
+
+↓
+
+Root Cause
+
+↓
+
+Recovery
+
+↓
+
+Verification
+
+↓
+
+Root Cause Analysis
+
+↓
+
+Post-Incident Review
 
 ---
 
-## Hands-on
+# Common Production Scenarios Practiced
 
-Learn and practice the technology.
+## Linux
 
-Example:
-
-* Install
-* Configure
-* Test
-* Verify
-* Practice commands
-* Explore features
-
----
-
-## Build
-
-Immediately integrate that technology into the Employee Management System.
-
-Examples:
-
-* Deploy the application
-* Add a database
-* Store images
-* Enable HTTPS
-* Configure monitoring
-* Deploy containers
-* Automate infrastructure
-
-The project evolves after every phase.
-
----
-
-## Troubleshoot
-
-Practice solving real production incidents.
-
-Examples:
-
-* Website unavailable
+* SSH failures
+* Disk full
 * High CPU
-* Access denied
-* Database connection failure
-* Docker container crash
-* ECS deployment failure
-* DNS issues
-* SSL certificate problems
+* High memory
+* Service failures
+* Permission issues
 
-The objective is not only to build the application but also to understand how to diagnose and resolve issues when things go wrong.
+## AWS
+
+* EC2 unavailable
+* EBS storage issues
+* IAM AccessDenied
+* S3 permission issues
+* Security Group misconfiguration
+* Route Table problems
+* NAT Gateway failures
+* Route 53 DNS issues
+
+## Application
+
+* HTTP 500
+* HTTP 502
+* HTTP 503
+* HTTP 504
+* Gunicorn failures
+* Nginx failures
+* Flask startup failures
+
+## Database
+
+* Connection timeouts
+* Connection exhaustion
+* Slow queries
+* Storage issues
+
+## Containers
+
+* ECS task failures
+* Docker container crashes
+* Image pull failures
+
+## Kubernetes
+
+* CrashLoopBackOff
+* ImagePullBackOff
+* Pending Pods
+* Failed readiness probes
+* Failed liveness probes
+* Service connectivity failures
+
+## Monitoring
+
+* CloudWatch alarm investigations
+* CloudWatch Agent troubleshooting
+* X-Ray trace analysis
+* OpenTelemetry latency investigations
 
 ---
 
-## Checkpoint
+# Production Incident Lifecycle Practiced
 
-Every phase ends with a checkpoint to confirm mastery before moving to the next technology.
-
----
-
-# Continuous Git Workflow
-
-Git and GitHub are used throughout the entire project.
-
-After every completed task:
-
-1. Check repository status.
-2. Review changes.
-3. Commit with a meaningful message.
-4. Push to GitHub.
-5. Update project documentation.
-6. Continue building.
-
-By the final phase, GitHub also powers the CI/CD pipeline.
+* Detect incidents
+* Assess customer impact
+* Collect evidence
+* Investigate production systems
+* Restore services
+* Verify recovery
+* Write Root Cause Analysis
+* Conduct Post-Incident Reviews
+* Improve production reliability
 
 ---
 
-# Final Production Architecture
+# Cloud Support Engineer Mindset
 
-By the end of the roadmap, the Employee Management System will include:
+This repository is built around the operational mindset expected in production environments.
 
-* Linux Administration
-* Git & GitHub
-* Amazon EC2
-* Amazon EBS
-* Nginx
-* Python
+Rather than focusing only on deploying AWS resources, the training emphasizes:
+
+* Understanding customer impact
+* Making evidence-based decisions
+* Following structured troubleshooting workflows
+* Restoring services safely
+* Preventing recurring incidents
+* Improving operational reliability
+
+---
+
+# Current Outcome
+
+Through this training I have built practical experience operating production-style AWS environments using:
+
 * Flask
-* Gunicorn
-* Amazon RDS
-* Amazon S3
-* IAM Roles
-* CloudWatch
-* CloudWatch Alarms
-* Amazon SNS
-* CloudTrail
-* AWS Systems Manager (SSM)
-* Custom VPC
-* Security Groups
-* Network ACLs
-* Application Load Balancer
-* Target Group
-* Route 53
-* AWS Certificate Manager (HTTPS)
-* Auto Scaling Group
-* Docker
-* Amazon ECS
-* AWS Lambda
-* Terraform
-* GitHub Actions CI/CD
+* Google Online Boutique
+* Astronomy Shop
 
-Everything is connected into a single production-ready application.
+The focus has been on:
+
+* AWS infrastructure operations
+* Linux administration
+* Cloud monitoring
+* Production troubleshooting
+* Incident management
+* Root Cause Analysis
+* Reliability engineering
+
+This repository represents my progression toward Cloud Support Engineer, Cloud Operations Engineer, AWS Support Engineer, and Site Reliability Engineer (SRE) roles.
 
 ---
 
-# Goal of This Repository
+# Repository Status
 
-This repository is more than a collection of AWS labs.
+**Status:** In Progress
 
-It is a complete, project-based learning journey that combines:
-
-* Cloud Engineering
-* Linux Administration
-* AWS
-* DevOps
-* Infrastructure as Code
-* Monitoring
-* Security
-* Automation
-* Production Troubleshooting
-
-By completing every phase, you will have built a production-style Employee Management System while developing the practical skills used by Cloud Engineers, Cloud Support Engineers, DevOps Engineers, and Site Reliability Engineers.
+I continue to expand this repository with additional production scenarios, automation, monitoring improvements, and hands-on operational exercises to strengthen my production support skills.
