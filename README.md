@@ -1,425 +1,289 @@
-# AWS Production Cloud Support Engineer Training
+# 🚀 AWS Cloud Support Engineer Production Project
 
-> A hands-on, production-focused AWS Cloud Support Engineer training repository built around real-world operations, troubleshooting, incident response, reliability engineering, and production support.
-
----
-
-# Overview
-
-This repository documents my end-to-end journey toward becoming a **Production Cloud Support Engineer**.
-
-Unlike traditional AWS courses that focus on creating resources, this training focuses on **operating, monitoring, troubleshooting, recovering, and improving production systems** using real-world scenarios.
-
-Throughout this training, I worked with three applications:
-
-* **Flask Application** – Traditional web application running on AWS infrastructure
-* **Google Online Boutique** – Kubernetes-based microservices application
-* **Astronomy Shop** – Cloud-native application used for observability and distributed tracing
-
-The emphasis has been on thinking and operating like a **Cloud Support Engineer**, **Cloud Operations Engineer**, or **Site Reliability Engineer (SRE)** rather than an application developer.
+> **End-to-end deployment of a production-style Flask web application on AWS using core cloud infrastructure, containerization, orchestration, automation, monitoring, logging, and Infrastructure as Code.**
 
 ---
 
-# Training Philosophy
+## 📖 Project Overview
 
-The objective of this repository is to answer questions such as:
+This project documents my end-to-end implementation of a production-style cloud environment by deploying a simple HTML website served by a Flask application on AWS. Rather than focusing only on application development, the primary objective was to demonstrate practical Cloud Support Engineer skills by designing, deploying, troubleshooting, monitoring, and automating a complete cloud infrastructure similar to what is used in production environments.
 
-* What happens when production breaks?
-* How do you investigate incidents?
-* How do you restore services safely?
-* How do you determine the root cause?
-* How do you prevent incidents from happening again?
-
-Every module follows a production support mindset.
-
-Each module includes:
-
-* Real Production Introduction
-* Module Goal
-* What It Is
-* Why Companies Use It
-* Where It Fits in Production Architecture
-* Internal Working
-* Production Workflow
-* Commands Used by Cloud Support Engineers
-* Common Production Failures
-* Incident Tickets
-* Troubleshooting Methodology
-
-  * Symptoms
-  * Evidence
-  * Investigation
-  * Root Cause
-  * Recovery
-  * Verification
-  * RCA
-* Hands-on Labs
-* Production Exercises
-* Interview Questions
+The project began with building a secure network architecture using Amazon VPC and gradually progressed through compute, storage, containerization, orchestration, networking, monitoring, automation, and Infrastructure as Code. At every stage, I validated the deployment, documented my configuration, and resolved issues encountered during implementation to simulate the responsibilities of a Cloud Support Engineer.
 
 ---
 
-# Technologies Covered
+# Architecture
 
-## Linux
+```
+Users
+   │
+Route 53
+   │
+Application Load Balancer
+   │
+Target Group
+   │
+Amazon ECS Service
+   │
+Docker Container
+   │
+Flask Application
+   │
+Amazon ECR
+   │
+CI/CD Pipeline
+   │
+GitHub
+   │
+CloudWatch
+   │
+SNS Notifications
+   │
+CloudTrail Logs
+```
 
-* Linux administration
-* Users and permissions
-* Services
-* SSH
-* Networking
-* Log analysis
-* Process management
-* Disk management
-* Performance troubleshooting
+Infrastructure was provisioned inside a custom VPC with public and private subnets, secured with Security Groups, Route Tables, and Network ACLs.
 
 ---
 
-## Python & Web Application Operations
+# Technologies Used
 
-* Python virtual environments
-* Flask production deployment
-* Gunicorn
-* Nginx
-* systemd
-
----
-
-## AWS Infrastructure
-
-* AWS CLI
-* IAM
-* EC2
-* EBS
-* VPC
-* Security Groups
-* Network ACLs
-* Route Tables
-* Internet Gateway
-* NAT Gateway
-* Route 53
-* AWS Certificate Manager (ACM)
+* AWS VPC
+* Amazon EC2
 * AWS Systems Manager (SSM)
-
----
-
-## Data Services
-
-* Amazon RDS
-* Redis
+* Amazon EBS
+* Amazon EFS
 * Amazon S3
-
----
-
-## Containers & Orchestration
-
 * Docker
+* Python Flask
+* Git
+* GitHub
 * Amazon ECR
 * Amazon ECS
-* Amazon EKS
-
----
-
-## Infrastructure as Code & Deployment
-
-* Git
+* Target Groups
+* Application Load Balancer
+* Route 53
+* Auto Scaling
 * CI/CD
-* Terraform
-
----
-
-## Monitoring & Observability
-
 * Amazon CloudWatch
-* CloudWatch Agent
-* CloudWatch Alarms
-* SNS
-* AWS X-Ray
-* OpenTelemetry
+* Amazon SNS
+* AWS CloudTrail
+* Amazon RDS
+* Terraform
+* Linux
+* AWS CLI
 
 ---
 
-## Serverless
+# Project Implementation
 
-* AWS Lambda
+## 1. VPC
 
----
+I created a custom VPC instead of using the default AWS network. Public and private subnets were configured with dedicated route tables, an Internet Gateway, and a NAT Gateway to provide secure communication between internet-facing resources and backend services. Security Groups and Network ACLs were configured to control inbound and outbound traffic while validating connectivity between all network components.
 
-## Production Operations
-
-* Incident Response
-* Troubleshooting
-* Root Cause Analysis (RCA)
-* Post-Incident Review
-* Reliability Engineering
+**Troubleshooting:** Route table misconfigurations, incorrect CIDR blocks, internet connectivity issues, Security Group rules, NAT Gateway routing, and Network ACL conflicts.
 
 ---
 
-# Applications Used
+## 2. EC2 (SSH & SSM)
 
-## Flask Application
+I launched Amazon EC2 instances to host the application and perform administration tasks. Secure Shell (SSH) and AWS Systems Manager Session Manager were configured to enable secure remote access without exposing unnecessary ports. IAM roles were attached to allow Systems Manager communication.
 
-Used to practice:
-
-* Linux administration
-* EC2 operations
-* Nginx
-* Gunicorn
-* systemd
-* RDS
-* Redis
-* S3
-* Docker
-* ECS
-* CloudWatch
-* IAM
-* Networking
-* Incident response
-* Root Cause Analysis
-
-Typical production scenarios:
-
-* HTTP 500 errors
-* 502 Bad Gateway
-* 504 Gateway Timeout
-* Database connectivity failures
-* Disk full
-* High CPU
-* Memory exhaustion
-* Deployment failures
-* SSL certificate issues
-* Application recovery
+**Troubleshooting:** SSH failures, missing key pairs, SSM agent connectivity issues, IAM permission errors, security group restrictions, and instance reachability.
 
 ---
 
-## Google Online Boutique
+## 3. Storage (EBS, EFS & S3)
 
-Used to practice Kubernetes and microservices operations.
+Persistent storage was implemented using Amazon EBS volumes attached to EC2 instances. Amazon EFS was configured for shared file storage, while Amazon S3 was used to store application assets, backups, and deployment artifacts with versioning enabled.
 
-Topics covered:
-
-* Amazon EKS
-* Pod lifecycle
-* CrashLoopBackOff
-* ImagePullBackOff
-* Kubernetes networking
-* Service-to-service communication
-* Redis failures
-* Rolling deployments
-* Kubernetes troubleshooting
-* Production incidents
-* Distributed application failures
+**Troubleshooting:** Mount failures, storage permission errors, bucket policies, incorrect filesystem configuration, and disk utilization issues.
 
 ---
 
-## Astronomy Shop
+## 4. Docker on EC2
 
-Used to practice cloud-native observability.
+Docker was installed and configured on EC2 to containerize the application. Images were created, containers were managed, networking was configured, and persistent volumes were tested to ensure application consistency.
 
-Topics covered:
-
-* OpenTelemetry
-* AWS X-Ray
-* Distributed tracing
-* Dependency analysis
-* Performance bottlenecks
-* Latency investigation
-* Root Cause Analysis
-* Post-Incident Reviews
-* Reliability improvements
+**Troubleshooting:** Container crashes, Docker daemon failures, port conflicts, missing images, and volume mapping issues.
 
 ---
 
-# Production Skills Developed
+## 5. Flask Application
 
-This repository focuses on the day-to-day responsibilities of a Cloud Support Engineer.
+A lightweight Flask application serving a simple HTML website was developed and deployed inside Docker containers. Environment variables were configured and the application was tested locally before deployment to AWS.
 
-Examples include:
-
-* Production monitoring
-* Incident response
-* Infrastructure troubleshooting
-* Application troubleshooting
-* Database troubleshooting
-* Network troubleshooting
-* Container troubleshooting
-* Kubernetes troubleshooting
-* Performance analysis
-* Root Cause Analysis
-* Reliability improvement
-* Documentation
-* Production communication
+**Troubleshooting:** Dependency conflicts, incorrect application ports, Flask startup errors, Python package issues, and container runtime failures.
 
 ---
 
-# Troubleshooting Workflow
+## 6. Git
 
-Every production issue is approached using the same structured methodology.
+Git was used for version control throughout the project. Feature branches, commits, merges, and repository history were maintained to track project progress and support collaborative development practices.
 
-Symptoms
-
-↓
-
-Customer Impact
-
-↓
-
-Evidence Collection
-
-↓
-
-Metrics
-
-↓
-
-Logs
-
-↓
-
-Distributed Traces
-
-↓
-
-Investigation
-
-↓
-
-Root Cause
-
-↓
-
-Recovery
-
-↓
-
-Verification
-
-↓
-
-Root Cause Analysis
-
-↓
-
-Post-Incident Review
+**Troubleshooting:** Merge conflicts, accidental commits, branch synchronization, and repository recovery.
 
 ---
 
-# Common Production Scenarios Practiced
+## 7. GitHub
 
-## Linux
+The project was hosted on GitHub with a structured repository, documentation, and version history. GitHub served as the central source code repository for the CI/CD pipeline.
 
-* SSH failures
-* Disk full
-* High CPU
-* High memory
-* Service failures
-* Permission issues
-
-## AWS
-
-* EC2 unavailable
-* EBS storage issues
-* IAM AccessDenied
-* S3 permission issues
-* Security Group misconfiguration
-* Route Table problems
-* NAT Gateway failures
-* Route 53 DNS issues
-
-## Application
-
-* HTTP 500
-* HTTP 502
-* HTTP 503
-* HTTP 504
-* Gunicorn failures
-* Nginx failures
-* Flask startup failures
-
-## Database
-
-* Connection timeouts
-* Connection exhaustion
-* Slow queries
-* Storage issues
-
-## Containers
-
-* ECS task failures
-* Docker container crashes
-* Image pull failures
-
-## Kubernetes
-
-* CrashLoopBackOff
-* ImagePullBackOff
-* Pending Pods
-* Failed readiness probes
-* Failed liveness probes
-* Service connectivity failures
-
-## Monitoring
-
-* CloudWatch alarm investigations
-* CloudWatch Agent troubleshooting
-* X-Ray trace analysis
-* OpenTelemetry latency investigations
+**Troubleshooting:** Authentication failures, repository permissions, remote configuration issues, and push conflicts.
 
 ---
 
-# Production Incident Lifecycle Practiced
+## 8. Docker Build
 
-* Detect incidents
-* Assess customer impact
+Production-ready Docker images were built using optimized Dockerfiles. Images were tested locally before deployment and unnecessary layers were removed to reduce image size.
+
+**Troubleshooting:** Build failures, missing dependencies, Docker cache issues, incorrect working directories, and startup command errors.
+
+---
+
+## 9. Amazon ECR
+
+Docker images were securely stored in Amazon Elastic Container Registry (ECR). Authentication, repository management, image tagging, and version control were implemented to support deployments.
+
+**Troubleshooting:** Authentication failures, image push errors, repository permissions, and image version mismatches.
+
+---
+
+## 10. Amazon ECS
+
+Amazon Elastic Container Service (ECS) was used to orchestrate container deployment. Task Definitions, Services, and Cluster configurations were created to ensure application availability and scalability.
+
+**Troubleshooting:** Task failures, unhealthy containers, insufficient resources, deployment failures, and IAM permission issues.
+
+---
+
+## 11. Target Group
+
+A Target Group was configured to register ECS tasks and perform continuous health checks. This ensured only healthy application instances received traffic.
+
+**Troubleshooting:** Failed health checks, incorrect ports, unhealthy targets, and networking configuration errors.
+
+---
+
+## 12. Application Load Balancer
+
+An Application Load Balancer (ALB) was deployed to distribute incoming traffic across ECS tasks. Listener rules and routing behavior were configured to improve availability.
+
+**Troubleshooting:** HTTP 502/503 errors, listener configuration, backend communication failures, SSL issues, and target registration problems.
+
+---
+
+## 13. Route 53
+
+Amazon Route 53 was configured to provide DNS resolution for the deployed application using hosted zones and alias records pointing to the Application Load Balancer.
+
+**Troubleshooting:** DNS propagation delays, incorrect record configuration, alias resolution failures, and domain verification.
+
+---
+
+## 14. Auto Scaling
+
+Auto Scaling policies were implemented to automatically increase or decrease application capacity based on workload demand, improving both availability and cost optimization.
+
+**Troubleshooting:** Scaling policies not triggering, launch failures, unhealthy instances, and insufficient capacity.
+
+---
+
+## 15. CI/CD
+
+A Continuous Integration and Continuous Deployment (CI/CD) pipeline was implemented to automate application deployment from GitHub to AWS. Code changes triggered automated build and deployment processes, reducing manual intervention.
+
+**Troubleshooting:** Pipeline execution failures, deployment rollbacks, build errors, missing environment variables, and authentication issues.
+
+---
+
+## 16. CloudWatch
+
+Amazon CloudWatch was configured to collect metrics, application logs, dashboards, and alarms. Resource utilization and application performance were continuously monitored to detect operational issues before they affected users.
+
+**Troubleshooting:** Missing logs, alarm configuration errors, metric collection failures, CloudWatch Agent issues, and delayed log delivery.
+
+---
+
+## 17. Amazon SNS
+
+Amazon Simple Notification Service (SNS) was integrated with CloudWatch alarms to deliver email notifications whenever critical thresholds or failures occurred.
+
+**Troubleshooting:** Subscription confirmation failures, notification delivery issues, permission errors, and alarm integration problems.
+
+---
+
+## 18. AWS CloudTrail
+
+AWS CloudTrail was enabled to record all API activity across the environment. Logs were reviewed to audit infrastructure changes, investigate incidents, and identify unauthorized actions.
+
+**Troubleshooting:** Missing events, disabled trails, logging configuration issues, and S3 delivery failures.
+
+---
+
+## 19. Database
+
+A relational database was provisioned to support the application. Connectivity, authentication, backups, storage management, and performance monitoring were validated throughout deployment.
+
+**Troubleshooting:** Connection failures, authentication errors, storage limitations, high CPU utilization, and slow query performance.
+
+---
+
+## 20. Terraform
+
+Infrastructure provisioning was automated using Terraform. Networking, compute resources, storage, and supporting services were defined as code to enable consistent, repeatable deployments.
+
+**Troubleshooting:** State conflicts, provider authentication issues, dependency ordering, resource drift, and failed apply operations.
+
+---
+
+## 21. Production Incident Simulation
+
+To reinforce operational readiness, I simulated numerous production incidents across networking, compute, storage, containers, load balancing, monitoring, security, and deployments. Each scenario followed a structured troubleshooting methodology:
+
+* Identify symptoms
 * Collect evidence
-* Investigate production systems
-* Restore services
-* Verify recovery
-* Write Root Cause Analysis
-* Conduct Post-Incident Reviews
-* Improve production reliability
+* Review logs and metrics
+* Determine root cause
+* Implement recovery
+* Validate system health
+* Document Root Cause Analysis (RCA)
+
+This exercise strengthened my ability to respond systematically to production issues while minimizing downtime.
 
 ---
 
-# Cloud Support Engineer Mindset
+# Skills Demonstrated
 
-This repository is built around the operational mindset expected in production environments.
-
-Rather than focusing only on deploying AWS resources, the training emphasizes:
-
-* Understanding customer impact
-* Making evidence-based decisions
-* Following structured troubleshooting workflows
-* Restoring services safely
-* Preventing recurring incidents
-* Improving operational reliability
-
----
-
-# Current Outcome
-
-Through this training I have built practical experience operating production-style AWS environments using:
-
-* Flask
-* Google Online Boutique
-* Astronomy Shop
-
-The focus has been on:
-
-* AWS infrastructure operations
-* Linux administration
-* Cloud monitoring
-* Production troubleshooting
-* Incident management
+* AWS Infrastructure Deployment
+* Cloud Networking
+* Linux Administration
+* EC2 Management
+* Docker Containerization
+* Container Orchestration with ECS
+* Load Balancing
+* DNS Management
+* Storage Administration
+* CI/CD Implementation
+* Infrastructure as Code
+* Monitoring and Alerting
+* Log Analysis
+* Security Best Practices
+* Production Troubleshooting
+* Incident Response
 * Root Cause Analysis
-* Reliability engineering
-
-This repository represents my progression toward Cloud Support Engineer, Cloud Operations Engineer, AWS Support Engineer, and Site Reliability Engineer (SRE) roles.
+* Cloud Automation
+* Version Control
+* Technical Documentation
 
 ---
 
-# Repository Status
+# Key Takeaways
 
-**Status:** In Progress
+Through this project, I developed practical experience deploying and supporting a cloud-native application using AWS services commonly found in production environments. Beyond deploying infrastructure, I focused on validating configurations, monitoring system health, troubleshooting failures, documenting implementation steps, and automating deployments. This project reflects the day-to-day responsibilities of a Cloud Support Engineer, including infrastructure management, operational support, incident investigation, and continuous improvement of cloud-based systems.
 
-I continue to expand this repository with additional production scenarios, automation, monitoring improvements, and hands-on operational exercises to strengthen my production support skills.
+---
+
+## Future Improvements
+
+Future enhancements include implementing HTTPS with AWS Certificate Manager, AWS WAF for application protection, ECS blue/green deployments, centralized log aggregation, container vulnerability scanning, CloudWatch dashboards for business metrics, automated backups, disaster recovery strategies, and advanced security monitoring to further align the environment with enterprise production standards.
